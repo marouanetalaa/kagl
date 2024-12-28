@@ -1,0 +1,30 @@
+data:
+  trainpath: '/mounts/Datasets3/2024-2025-ChallengePlankton/train'
+  testpath: '/mounts/Datasets3/2024-2025-ChallengePlankton/test'
+  # testpath: '/dummy/path/to/test'
+  patch_size : [256, 256]
+  batch_size: 16
+  num_workers: 4
+  valid_ratio: 0.2
+
+optim:
+  algo: AdamW
+  params:
+    lr: 0.001
+
+nepochs: 20
+loss: "CrossEntropyLoss"
+
+logging:
+  wandb: 
+    project: plankton
+    entity: sample_entity
+  logdir: "./logs"  # Better to provide the fullpath, especially on the cluster
+# model:
+#   class: Linear
+model:
+  class: UNet
+
+test:
+  checkpoint: "./logs/UNet_11/best_model.pt"   # Path to the trained model checkpoint
+  submission_file: "./submissions/submission_UNet_11.csv"     # Path to save the submission file
